@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// BEGIN GENERATED_PRISMA_MODELS
+model Lead {
+  id String @id @default(cuid())
+  name String?
+  email String?
+  phone String?
+  status String
+  type String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  siteId String?
+  site Site? @relation(fields: [siteId], references: [id])
+  opportunities Opportunity[]
+}
+
+model Site {
+  id String @id @default(cuid())
+  address String
+  city String
+  state String
+  zip String
+  clientAccountId String
+  clientAccount ClientAccount @relation(fields: [clientAccountId], references: [id])
+  jobs Job[]
+}
+
+model Job {
+  id String @id @default(cuid())
+  leadId String?
+  lead Lead? @relation(fields: [leadId], references: [id])
+  siteId String?
+  site Site? @relation(fields: [siteId], references: [id])
+  status String
+  scheduledAt DateTime?
+  completedAt DateTime?
+  quote String?
+  invoiceId String?
+}
+
+model ClientAccount {
+  id String @id @default(cuid())
+  name String
+  contact String?
+  sites Site[]
+  contracts Contract[]
+}
+
+model Contract {
+  id String @id @default(cuid())
+  clientAccountId String
+  clientAccount ClientAccount @relation(fields: [clientAccountId], references: [id])
+  startDate DateTime
+  endDate DateTime?
+  price Decimal?
+  jobs Job[]
+}
+
+model Opportunity {
+  id String @id @default(cuid())
+  leadId String?
+  lead Lead? @relation(fields: [leadId], references: [id])
+  status String
+  createdAt DateTime @default(now())
+  value Decimal?
+}
+// END GENERATED_PRISMA_MODELS
