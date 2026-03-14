@@ -1,0 +1,1 @@
+# Cleaning Ops Agent\n\nCleaning Ops Agent uses the startup-box foundation to deliver an opinionated web app, API, workflow package, and deployment path.\n\n## Focus\n\n- Lead intake and qualification\n- Scheduling & Dispatch\n- QA & proof-of-service collection\n- Invoicing & Closeout\n- Audit-friendly workflow execution\n- Bounded, domain-specific overlays\n
