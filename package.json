@@ -1,0 +1,8 @@
+{
+  "name": "cleaning-ops-agent",
+  "private": true,
+  "packageManager": "pnpm@10",
+  "scripts": {
+    "dev": "docker compose up --build"
+  }
+}
